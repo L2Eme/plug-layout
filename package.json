@@ -3,7 +3,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git@github.com:L2Eme/template.git"
+    "url": "git@github.com:L2Eme/plug-layout.git"
   },
   "license": "MIT",
   "version": "0.1.0",
@@ -22,6 +22,14 @@
     ".": {
       "require": "./dist/cjs/index.js",
       "import": "./dist/esm/index.js"
+    },
+    "./buildin": {
+      "require": "./dist/cjs/buildin.js",
+      "import": "./dist/esm/buildin.js"
+    },
+    "./layout": {
+      "require": "./dist/cjs/layout.js",
+      "import": "./dist/esm/layout.js"
     }
   },
   "dependencies": {
