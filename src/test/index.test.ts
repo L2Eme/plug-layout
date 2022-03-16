@@ -1,21 +1,21 @@
 import {
 	BufferPlug,
 	StructPlug,
-	fixedSizeLayout,
 	createLayout,
 } from '../layout'
 
-let U8Plug = (property: string) => BufferPlug(property, fixedSizeLayout(
-	1,
-	(v, b) => b[0] = v,
-	(b) => b[0],
-))
+import {
+	U8Plug,
+	ConstU8Plug,
+	StringPlug,
+} from '../buildin'
 
 describe("create a temp layout", () => {
 
-	let l = createLayout([
-		BufferPlug('name'),
+	let l = createLayout<any>([
+		StringPlug('name'),
 		U8Plug('version'),
+		ConstU8Plug('instruction', 1),
 		StructPlug('phone', [
 			U8Plug('type'),
 			BufferPlug('number'),
@@ -30,8 +30,9 @@ describe("create a temp layout", () => {
 
 	let encoded_buff = l.encode(
 		{
-			name: Buffer.from([0, 1, 2, 3]),
+			name: 'hello',
 			version: 255,
+			instruction: 1,
 			phone: {
 				type: 3,
 				number: Buffer.from([2, 3, 3]),

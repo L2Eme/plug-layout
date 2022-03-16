@@ -52,7 +52,7 @@ export class LayoutContext {
 
 }
 
-export type TBufferPlugOption = {
+export type TBufferPlugLayout = {
 	encode(v: any): Buffer,
 	decode(b: Buffer): { v: any, offset: number },
 }
@@ -61,7 +61,7 @@ export function fixedSizeLayout<T = any>(
 	fixedSize: number,
 	encode: (v: T, fixedBuffer: Buffer) => void,
 	decode: (b: Buffer) => T,
-): TBufferPlugOption {
+): TBufferPlugLayout {
 	return {
 		encode(v) {
 			let fixedBuffer = Buffer.alloc(fixedSize);
@@ -77,7 +77,7 @@ export function fixedSizeLayout<T = any>(
 export function dynamicSizeLayout<T = any>(
 	encode: (v: T) => Buffer,
 	decode: (b: Buffer) => T,
-): TBufferPlugOption {
+): TBufferPlugLayout {
 	return {
 		encode(v) {
 			let b = encode(v);
@@ -104,7 +104,7 @@ const defaultOption = dynamicSizeLayout(
 /** create a buffer plug with a name */
 export const BufferPlug = function (
 	property: string,
-	opts: TBufferPlugOption = defaultOption,
+	opts: TBufferPlugLayout = defaultOption,
 ): LayoutPlug {
 	let decode = opts.decode;
 
