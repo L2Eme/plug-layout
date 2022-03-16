@@ -1,6 +1,8 @@
 {
   "name": "@line100/plug-layout",
-  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:L2Eme/plug-layout.git"
@@ -34,6 +36,7 @@
   },
   "dependencies": {
     "@line100/plug": "^1.0.7",
+    "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",
     "tslib": "^2.3.1"
   },
